@@ -1,5 +1,5 @@
 from ai_math import Polynomial, Matrix, RandomMatrix
-from neural_network import FeedForwardNeuralNetwork
+from neural_network import FeedForwardNeuralNetwork, LeakyReluActivationFunction, ReluActivationFunction, IdentityActivationFunction
 
 def main() -> None:
     matrix = RandomMatrix(4, 4, 31.5)
@@ -30,7 +30,12 @@ def main() -> None:
 
 
     neural_network = FeedForwardNeuralNetwork(
-            topology=(1, 1)
+            topology=(1, 110, 1000, 3),
+            activation_functions=[
+                ReluActivationFunction(),
+                IdentityActivationFunction(),
+                LeakyReluActivationFunction(0.01),
+                ]
             )
 
     print(neural_network.layers)
