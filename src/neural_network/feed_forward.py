@@ -41,3 +41,28 @@ class FeedForwardNeuralNetwork(object):
 
         return current_input
 
+
+    def cost(self, data: list[list[Matrix]]) -> float:
+        return sum(
+                pow(sum(round(value, 3) for value in (train_out - self.feed_forward(train_in)).values), 2) for (train_in, train_out) in data
+                ) / len(data)
+
+
+    def back_propagate(self, batch_size: int, data: list[list[Matrix]], learning_rate: float = 0.0001, log: bool = False) -> None:
+        eps = 0.01  
+
+        for _ in range(batch_size):
+            for layer in self.layers:
+                cost = self.cost(data)
+
+                layer.bias += eps
+                layer.bias -= learning_rate * ((self.cost(data) - cost) / eps)
+                layer.bias -= eps
+
+                for value in layer.weigths.values :
+                    value += eps
+                    value -= learning_rate * ((self.cost(data) - cost) / eps)
+                    value -= eps
+
+                print(f"batch: {_} cost: {cost}")
+
