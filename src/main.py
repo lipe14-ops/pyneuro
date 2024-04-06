@@ -1,4 +1,5 @@
 from ai_math import Polynomial, Matrix, RandomMatrix
+from neural_network import FeedForwardNeuralNetwork
 
 def main() -> None:
     matrix = RandomMatrix(4, 4, 31.5)
@@ -26,6 +27,21 @@ def main() -> None:
     polynomial.set_coeficient(2, 487);
     output = polynomial.get_image_of(value);
     print(f"the image of {value} is: {output}")
+
+
+    neural_network = FeedForwardNeuralNetwork(
+            topology=(1, 1)
+            )
+
+    print(neural_network.layers)
+
+    entry_matrix = Matrix(1, 1)
+
+    output = neural_network.feed_forward(
+                entry_matrix
+            )
+
+    print(output.values)
 
 
 if __name__ == "__main__":
