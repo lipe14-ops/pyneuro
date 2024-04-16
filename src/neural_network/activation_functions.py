@@ -49,3 +49,15 @@ class IdentityActivationFunction(ActivationFunction):
     def matrix_apply(self, matrix: Matrix) -> Matrix:
         return matrix
  
+
+class SoftMaxActivationFunction(ActivationFunction):
+    def __init__(self, temperature: int = 1) -> None:
+        self.temperature = temperature
+
+    def get_image_of(self, x: int | float) -> int | float:
+        return pow(2.718, x / self.temperature)
+    
+    def matrix_apply(self, matrix: Matrix) -> Matrix:
+        matrix.values = [self.get_image_of(value) for value in matrix.values]
+        return matrix * (1 / sum(matrix.values))
+ 

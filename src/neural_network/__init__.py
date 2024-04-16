@@ -1,2 +1,2 @@
 from .feed_forward import FeedForwardNeuralNetwork
-from .activation_functions import ReluActivationFunction, IdentityActivationFunction, ActivationFunction, LeakyReluActivationFunction
+from .activation_functions import SoftMaxActivationFunction, ReluActivationFunction, IdentityActivationFunction, ActivationFunction, LeakyReluActivationFunction
