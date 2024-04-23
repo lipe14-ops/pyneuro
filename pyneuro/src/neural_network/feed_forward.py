@@ -1,6 +1,6 @@
 import random
-from ai_math import RandomMatrix
-from ai_math.matrix import Matrix
+from ..ai_math import RandomMatrix
+from ..ai_math.matrix import Matrix
 from .activation_functions import ActivationFunction
 
 
@@ -55,7 +55,8 @@ class FeedForwardNeuralNetwork(object):
 
     def back_propagate(self, batch_size: int, data: list[list[Matrix]], learning_rate: float = 0.001, log: bool = False) -> None:
         eps = 0.001  
-
+        cost = 0
+    
         for batch in range(batch_size):
             for layer in self.layers[::-1]:
                 cost = self.cost(data)
@@ -72,6 +73,5 @@ class FeedForwardNeuralNetwork(object):
                     layer.weigths.values[i] -= eps
 
             if log:
-                cost = self.cost(data)
                 print(f"batch: {batch} cost: {cost}")
 

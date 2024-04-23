@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ai_math import Matrix
+from ..ai_math import Matrix
 
 class ActivationFunction(ABC):
 
