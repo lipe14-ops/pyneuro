@@ -37,6 +37,9 @@ class Matrix(object):
         if self.rows != self.cols:
             raise ValueError("the matrix must be squared.")
 
+        if self.rows == 1:
+            return self.get_value(0, 0)
+
         if self.rows == 2:
             return self.get_value(0, 0) * self.get_value(1, 1) - self.get_value(0, 1) * self.get_value(1, 0)
 
