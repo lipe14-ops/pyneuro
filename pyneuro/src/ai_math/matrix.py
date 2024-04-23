@@ -210,6 +210,28 @@ class Matrix(object):
     def __idiv__(self, other: int | float) -> Matrix:
         return self.__div__(other)
 
+    def convolve(self, matrix: Matrix) -> Matrix:
+        if not (self.rows >= matrix.rows and self.cols >= matrix.cols):
+            raise ValueError(f"the input matrix must have the max order {self.rows}x{self.cols}.")
+
+        tmp_matrix = Matrix(self.rows - matrix.rows + 1, self.cols - matrix.cols + 1)
+
+        for conv_i in range(tmp_matrix.rows):
+            for conv_j in range(tmp_matrix.cols):
+                accumulator = 0
+
+                for matrix_i in range(matrix.rows):
+                    for matrix_j in range(matrix.cols):
+                        x = matrix_i + conv_i
+                        y = matrix_j + conv_j
+
+                        accumulator += self.get_value(x, y) * matrix.get_value(matrix_i, matrix_j)
+                        print(accumulator)
+
+                tmp_matrix.set_value(conv_i, conv_j, accumulator)
+            
+        return tmp_matrix
+
 
 class RandomMatrix(Matrix):
     def __init__(self, rows: int, cols: int, spectre: int | float = 1) -> None:
