@@ -224,9 +224,7 @@ class Matrix(object):
                     for matrix_j in range(matrix.cols):
                         x = matrix_i + conv_i
                         y = matrix_j + conv_j
-
                         accumulator += self.get_value(x, y) * matrix.get_value(matrix_i, matrix_j)
-                        print(accumulator)
 
                 tmp_matrix.set_value(conv_i, conv_j, accumulator)
             
