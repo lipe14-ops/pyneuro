@@ -231,6 +231,28 @@ class Matrix(object):
         return tmp_matrix
 
 
+    def max_pooling(self, pool: tuple[int, int]) -> Matrix:
+        pool_heigth, pool_width = pool 
+
+        if not (self.rows >= pool_heigth and self.cols >= pool_width):
+            raise ValueError(f"the input matrix must have the max order {self.rows}x{self.cols}.")
+
+        tmp_matrix = Matrix(self.rows - pool_heigth + 1, self.cols - pool_width + 1)
+
+        for conv_i in range(tmp_matrix.rows):
+            for conv_j in range(tmp_matrix.cols):
+                values = []
+
+                for matrix_i in range(pool_heigth):
+                    for matrix_j in range(pool_width):
+                        value= self.get_value(matrix_i + conv_i, matrix_j + conv_j)
+                        values.append(value)
+
+                tmp_matrix.set_value(conv_i, conv_j, max(values))
+            
+        return tmp_matrix
+
+
 class RandomMatrix(Matrix):
     def __init__(self, rows: int, cols: int, spectre: int | float = 1) -> None:
         super().__init__(rows, cols)
